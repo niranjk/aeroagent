@@ -1,0 +1,22 @@
+# Ignore the local virtual environment (Crucial!)
+.venv/
+venv/
+env/
+ENV/
+
+# Ignore Python caches
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.uv/
+
+# Ignore git history
+.git/
+.gitignore
+
+# Ignore local OS junk
+.DS_Store
