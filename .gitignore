@@ -21,7 +21,7 @@ backend/.ruff_cache/
 backend/.uv/
 backend/.venv/
 backend/venv/
-backend/env/
+backend/.env
 
 # ====================================================================
 # 3. FRONTEND (Node / JavaScript / TypeScript)
