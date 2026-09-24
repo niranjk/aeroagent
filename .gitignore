@@ -1,0 +1,37 @@
+# ====================================================================
+# 1. GLOBAL & SECRETS (Applies everywhere)
+# ====================================================================
+.env
+.env.*
+!.env.example
+secrets.toml
+.DS_Store
+Thumbs.db
+
+# ====================================================================
+# 2. BACKEND (Python / FastAPI / uv)
+# ====================================================================
+backend/__pycache__/
+backend/*.pyc
+backend/*.pyo
+backend/*.pyd
+backend/.pytest_cache/
+backend/.mypy_cache/
+backend/.ruff_cache/
+backend/.uv/
+backend/.venv/
+backend/venv/
+backend/env/
+
+# ====================================================================
+# 3. FRONTEND (Node / JavaScript / TypeScript)
+# ====================================================================
+frontend/node_modules/
+frontend/.next/
+frontend/dist/
+frontend/build/
+frontend/.nuxt/
+frontend/.cache/
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
