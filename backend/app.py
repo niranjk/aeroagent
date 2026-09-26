@@ -31,10 +31,19 @@ app = FastAPI(
     version="1.0.0",
     description="Simple API for aircraft engineering analytics and maintenance reporting",
 )
+# List the specific URLs your frontend uses
+origins = [
+    "http://localhost:3000",
+    "http://192.168.1.5:3000",
+]
 
+"""
+    this middleware allows cross-origin requests from any origin, which is useful for development and testing.
+    In production, you may want to restrict the allowed origins to specific domains for security reasons.
+"""
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=origins, # replace [*] with your explicit list 
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
