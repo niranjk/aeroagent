@@ -36,4 +36,4 @@ spec:
           imagePullPolicy: Always
 
           ports:
-            - containerPort: 3000
+            - containerPort: 80 # change to 80 for Nginx
