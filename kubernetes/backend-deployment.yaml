@@ -1,43 +1,45 @@
 # -----------------------------------------------------------------------------
-# Backend Deployment
-#
-# A Deployment ensures the desired number of backend pods are always running.
-# If a pod crashes, Kubernetes automatically recreates it.
+# Backend Deployment (Production Ready)
 # -----------------------------------------------------------------------------
-
 apiVersion: apps/v1
 kind: Deployment
-
 metadata:
   name: aeroagent-backend
   labels:
     app: aeroagent-backend
-
 spec:
   replicas: 1
-
   selector:
     matchLabels:
       app: aeroagent-backend
-
   template:
     metadata:
       labels:
         app: aeroagent-backend
-
     spec:
       containers:
         - name: aeroagent-backend
-
-          # Docker image stored in Amazon ECR
           image: ${BACKEND_IMAGE}
-
           imagePullPolicy: Always
-
           ports:
             - containerPort: 8000
-
-          # Load AWS credentials from Kubernetes Secret
-          envFrom:
-            - secretRef:
-                name: aws-credentials
+          
+          # 👈 THIS IS THE FIX. Explicitly map environmental variables from your secret
+          env:
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: aws-credentials
+                  key: AWS_ACCESS_KEY_ID
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: aws-credentials
+                  key: AWS_SECRET_ACCESS_KEY
+            - name: AWS_REGION
+              valueFrom:
+                secretKeyRef:
+                  name: aws-credentials
+                  key: AWS_REGION
+            - name: BEDROCK_MODEL_ID
+              value: "us.amazon.nova-pro-v1:0" # 👈 Permanently locks in your correct Nova cross-region string
