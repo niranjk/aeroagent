@@ -1,19 +1,13 @@
-# Use an official lightweight Node.js image
-FROM node:20-alpine
-
-# Set the working directory inside the container
+# Step 1: Build the React/Vite app assets
+FROM node:20-alpine AS builder
 WORKDIR /app
-
 COPY package*.json ./
-
-# Install frontend dependencies
 RUN npm install
-
-# Copy the rest of the frontend source code
 COPY . .
+RUN npm run build
 
-# Inform Docker that the container listens on Vite's default port
-EXPOSE 5173
-
-# Run the dev server and bind to all network interfaces
-CMD ["npm","run","dev","--","--host"]
+# Step 2: Serve those assets using high-performance Nginx
+FROM nginx:alpine
+COPY --from=builder /app/dist /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
