@@ -214,9 +214,11 @@ Return exactly one JSON object with this schema:
         return self._parse_json_response(response_text)
 
     def _document_name(self) -> str:
-        """Return a Bedrock-safe document name."""
-        return self.manual_pdf_path.stem.replace("_", " ").replace("-", " ")
-
+        """Return a Bedrock-safe document name containing NO spaces or weird symbols."""
+        # Strips out all spaces, dashes, and underscores to guarantee Bedrock validation passes
+        clean_name = "".join(c for c in self.manual_pdf_path.stem if c.isalnum())
+        return clean_name if clean_name else "manual"
+      
     @staticmethod
     def _extract_response_text(response: dict[str, Any]) -> str:
         """Extract text from a Bedrock Converse response."""
