@@ -1,0 +1,23 @@
+# --------------------------------------
+# Frontend Service
+# This Service exposes the FastAPI frontend  outside the Kubernetes cluster.
+# AWS automatically provisions an Elastic Load Balancer (ELB) to route external traffic to the frontend pods.  
+# -----------------------------------------
+
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: aeroagent-frontend-service
+
+
+spec:
+  selector:
+    app: aeroagent-frontend
+  
+  type: LoadBalancer
+
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000

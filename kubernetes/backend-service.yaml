@@ -1,0 +1,23 @@
+# --------------------------------------
+# Backend Service
+# This Service exposes the FastAPI backend  outside the Kubernetes cluster.
+# AWS automatically provisions an Elastic Load Balancer (ELB) to route external traffic to the backend pods.  
+# -----------------------------------------
+
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: aeroagent-backend-service
+
+
+spec:
+  selector:
+    app: aeroagent-backend
+  
+  type: LoadBalancer
+
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000

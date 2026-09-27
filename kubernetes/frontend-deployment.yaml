@@ -1,0 +1,39 @@
+# -----------------------------------------------------------------------------
+# Frontend Deployment
+#
+# Deploys the React frontend application to Kubernetes. 
+# Kubernetes pulls the Docker image from Amazon ECR and runs it in a pod.
+
+# -----------------------------------------------------------------------------
+
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: aeroagent-frontend
+  labels:
+    app: aeroagent-frontend
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: aeroagent-frontend
+
+  template:
+    metadata:
+      labels:
+        app: aeroagent-frontend
+
+    spec:
+      containers:
+        - name: aeroagent-frontend
+
+          # Docker image stored in Amazon ECR
+          image: ${FRONTEND_IMAGE}
+
+          imagePullPolicy: Always
+
+          ports:
+            - containerPort: 3000
