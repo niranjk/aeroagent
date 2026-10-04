@@ -439,10 +439,10 @@ if __name__ == "__main__":
     }
   ]
 }
-    bedrock_client = boto3.client("bedrock-runtime", region_name="us-east-1")
+    bedrock_client = boto3.client("bedrock-runtime", region_name="eu-central-1")
     analyzer = AircraftMaintenanceAnalyzer(
         bedrock_client=bedrock_client,
-        model_id="amazon.nova-pro-v1:0",
+        model_id="eu.amazon.nova-pro-v1:0",
         manual_pdf_path=manual_pdf_path,
         temperature=0.2,
         max_tokens=2000,

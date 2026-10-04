@@ -42,4 +42,4 @@ spec:
                   name: aws-credentials
                   key: AWS_REGION
             - name: BEDROCK_MODEL_ID
-              value: "amazon.nova-pro-v1:0" # 👈 Permanently locks in your correct Nova cross-region string
+              value: "eu.amazon.nova-pro-v1:0" # 👈 Permanently locks in your correct Nova cross-region string

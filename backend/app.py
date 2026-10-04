@@ -151,10 +151,10 @@ def maintenance_prediction(payload: dict[str, Any]) -> dict[str, Any]:
         )
 
     try:
-        aws_region = os.getenv("AWS_REGION", "us-east-1")
+        aws_region = os.getenv("AWS_REGION", "eu-central-1")
         aws_access_key = os.getenv("AWS_ACCESS_KEY_ID")
         aws_secret_key = os.getenv("AWS_SECRET_ACCESS_KEY")
-        bedrock_model_id = os.getenv("BEDROCK_MODEL_ID", "amazon.nova-pro-v1")
+        bedrock_model_id = os.getenv("BEDROCK_MODEL_ID", "eu.amazon.nova-pro-v1")
 
         boto3_kwargs = {
             "service_name": "bedrock-runtime",
